@@ -1,0 +1,6 @@
+<h1><%= @restaurant.name  %></h1>
+<%= @restaurant.description %>
+<%= @restaurant.address %>
+<%= link_to "Volver", restaurants_path, class:"btn btn-warning"%>
+<%= link_to "Eliminar", restaurant_path(@restaurant.id), 
+data: {turbo_method: :delete, turbo_confirm: "Esta seguro(a)"}, class: "btn btn-danger"%>
