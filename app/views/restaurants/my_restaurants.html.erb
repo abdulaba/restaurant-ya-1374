@@ -1,0 +1,44 @@
+<div class="container mt-4">
+  <div>
+    <hr>
+    <h5>Mis restaurantes</h5> <%= link_to "Nuevo", new_restaurant_path, class: "btn btn-primary btn-sm"%>
+    <hr>
+  </div>
+</div>
+<div class="container shadow">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Photo</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Direccion</th>
+      <th scope="col">Creado</th>
+      <th scope="col">Acciones</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% @restaurants.each do |restaurant|%>
+    <tr>
+      <th scope="row"><%= image_tag restaurant.photo, size: "50x50" %></th>
+      <td><%= restaurant.name %></td>
+      <td><%= restaurant.address %></td>
+      <td><%= restaurant.created_at %></td>
+      <td>
+        <%= link_to restaurant_path(restaurant), class: "text-decoration-none" do %>
+          <i class="fa-solid fa-eye"></i>
+        <% end %>
+        | 
+        <%= link_to edit_restaurant_path(restaurant), class: "text-warning text-decoration-none" do %>
+          <i class="fa-solid fa-pencil"></i>
+        <% end %>
+        | 
+        <%= link_to  restaurant_path(restaurant), class: "text-danger text-decoration-none", data: { turbo_method: :delete, turbo_confirm: "Esta seguro(a)?"} do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

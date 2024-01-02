@@ -43,7 +43,11 @@
 <!-- Inicio de cards-->
 <div class="container mt-3">
   <h5 class="text-secondary">Ultimos restaurantes agregados</h5>
-
+  <div class="row">
+    <% @restaurants.each do |restaurant| %>
+      <%= render "restaurants/restaurant", restaurant: restaurant %>
+    <% end %>
+  </div>
 
 </div>
 

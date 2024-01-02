@@ -1,11 +1,21 @@
 class RestaurantsController < ApplicationController
   def index
-    @restaurants = Restaurant.all
-    # @restaurants = [0x0334, 0x34635]
+    if params[:query].present?
+      @restaurants = Restaurant.search_info_rest(params[:query])
+    else  
+      @restaurants = Restaurant.all
+    end
   end
 
   def show
     @restaurant = Restaurant.find(params[:id])
+    @markers = [
+      {
+        lat: @restaurant.latitude,
+        lng: @restaurant.longitude
+      }
+    ]
+
   end
 
   def new
@@ -41,8 +51,12 @@ class RestaurantsController < ApplicationController
     redirect_to restaurants_path, status: :see_other
   end
 
+  def my_restaurants
+    @restaurants = Restaurant.where(user_id: current_user.id)
+  end
+
   private 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :description, :address)
+    params.require(:restaurant).permit(:name, :description, :address, :photo)
   end
 end

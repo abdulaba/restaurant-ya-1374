@@ -1,0 +1,17 @@
+<div class="container shadow border p-3">
+  <%= simple_form_for restaurant do |f| %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :address %>
+    <%= f.input :photo, as: :file %>
+    <div class="row">
+      <div class="col-1">
+        <%= f.submit restaurant.new_record? ? "Guardar" : "Actualizar" ,class: "btn btn-primary" %>
+      </div>
+      <div class="col-3">
+        <%= link_to "Volver",my_restaurants_path, class: "btn btn-warning" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+

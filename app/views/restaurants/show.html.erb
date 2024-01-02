@@ -4,3 +4,25 @@
 <%= link_to "Volver", restaurants_path, class:"btn btn-warning"%>
 <%= link_to "Eliminar", restaurant_path(@restaurant.id), 
 data: {turbo_method: :delete, turbo_confirm: "Esta seguro(a)"}, class: "btn btn-danger"%>
+<div class="d-flex justify-content-center mt-3">
+<div style="width: 35%; height: 200px;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="pk.eyJ1IjoibG9yZW56b2JjMjAyMyIsImEiOiJjbHBqdWp6aTYwMzNzMmpteXp6MDVoYzkyIn0.Cj9LGQ3Fm3jTAHCpHFuc1g"></div>
+</div>
+<div class="row">
+  <% @restaurant.dishes.each do |dish| %>
+    <div class="col-4">
+      <div class="card" style="width: 18rem;">
+        <%= image_tag dish.photo, class: "card-img-top" if dish.photo.attached? %>
+        <div class="card-body">
+          <p> <%= dish.name %> </p>
+          <p class="card-text"><%= dish.description %></p>
+          <p><%= dish.price %> </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+  
